@@ -41,6 +41,17 @@ jobs:
       - name: Push Docker image to Artifactory
         run: docker push ${{ secrets.DOCKER_REGISTRY }}/addressbook:latest
 
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GKE_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCLOUD_SERVICE_ACCOUNT_KEY }}
+          export_default_credentials: true
+
+      - name: Configure kubectl for GKE
+        run: |
+          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --region ${{ secrets.GKE_REGION }}
+
 #      - name: JFrog Xray scan
 #        uses: jfrog/setup-jfrog-cli@v4
 #        with:
@@ -54,4 +65,25 @@ jobs:
 #          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
 #          JFROG_ACCESS_TOKEN: ${{ secrets.JFROG_ACCESS_TOKEN }}
 
+#      - name: Authenticate to GKE
+#        run: |
+#          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > ${HOME}/gcloud.json
+#          gcloud auth activate-service-account --key-file=${HOME}/gcloud.json
+#          gcloud config set project ${{ secrets.GKE_PROJECT_ID }}
+#          gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --region ${{ secrets.GKE_REGION }}
 
+      # Step 12: Pull the Docker image from JFrog
+      - name: Pull Docker image from JFrog
+        run: |
+          docker pull ${{ secrets.DOCKER_REGISTRY }}/addressbook:latest
+
+      # Step 13: Deploy to GKE
+      - name: Deploy to GKE
+        run: |
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
+
+      # Optional: Verify deployment
+      - name: Verify Deployment
+        run: |
+          kubectl get pods
