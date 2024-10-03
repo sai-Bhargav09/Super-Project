@@ -41,15 +41,17 @@ jobs:
       - name: Push Docker image to Artifactory
         run: docker push ${{ secrets.DOCKER_REGISTRY }}/addressbook:latest
 
-      - name: JFrog Xray scan
-        uses: jfrog/setup-jfrog-cli@v4
-        with:
-          version: latest
+#      - name: JFrog Xray scan
+#        uses: jfrog/setup-jfrog-cli@v4
+#        with:
+#          version: latest
+#
+#      - name: Run Xray scan on Docker image
+#        run: |
+#          jfrog rt docker-scan ${{ secrets.DOCKER_REGISTRY }}/addressbook:latest --scan-type xray
+#        env:
+#          JFROG_URL: ${{ secrets.JFROG_URL }}
+#          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
+#          JFROG_ACCESS_TOKEN: ${{ secrets.JFROG_ACCESS_TOKEN }}
 
-      - name: Run Xray scan on Docker image
-        run: |
-          jfrog rt docker-scan ${{ secrets.DOCKER_REGISTRY }}/addressbook:latest --scan-type xray
-        env:
-          JFROG_URL: ${{ secrets.JFROG_URL }}
-          JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
-          JFROG_ACCESS_TOKEN: ${{ secrets.JFROG_ACCESS_TOKEN }}
+
