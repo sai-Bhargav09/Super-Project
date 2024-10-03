@@ -33,7 +33,9 @@ jobs:
 #          password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Log in to JFrog Artifactory
-        run: echo ${{ secrets.JFROG_ACCESS_TOKEN}} | docker login ${{ secrets.DOCKER_REGISTRY }} -u ${{ secrets.JFROG_USERNAME }} --password-stdin
+        run: |
+          echo ${{ secrets.JFROG_ACCESS_TOKEN}}
+          docker login ${{ secrets.DOCKER_REGISTRY }} -u ${{ secrets.JFROG_USERNAME }} --password-stdin
 
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_REGISTRY }}/addressbook:latest .
@@ -52,6 +54,10 @@ jobs:
       - name: Use gcloud CLI
         run: |
           gcloud info
+
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+          gcloud components install gke-gcloud-auth-plugin
 
       - name: Configure kubectl for GKE
         run: |
@@ -92,3 +98,4 @@ jobs:
       - name: Verify Deployment
         run: |
           kubectl get pods
+          kubectl get services
