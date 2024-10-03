@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: addressbook
-          image: ${{ secrets.DOCKER_REGISTRY }}/addressbook:latest
+          image: saib.jfrog.io/poc-docker-local/addressbook:latest
           ports:
             - containerPort: 8080
       imagePullSecrets:
