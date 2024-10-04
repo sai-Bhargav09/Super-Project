@@ -12,10 +12,11 @@ spec:
       labels:
         app: addressbook
     spec:
+      imagePullSecrets:
+        - name: jfrog-registry-secret
       containers:
         - name: addressbook
           image: saib.jfrog.io/poc-docker-local/addressbook:latest
           ports:
             - containerPort: 8080
-      imagePullSecrets:
-        - name: jfrog-registry  # If using a secret method
+        # If using a secret method
