@@ -72,7 +72,6 @@ jobs:
       - name: Configure kubectl for GKE
 #        if: ${{ !steps.check-cluster.outcome == 'success' }}
         run: |
-#          gcloud container clusters create poc-github-cluster --machine-type "e2-small" --disk-size "20" --spot --num-nodes "1" --region ${{ secrets.GKE_REGION }}
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --region ${{ secrets.GKE_REGION }}
 
 #      - name: JFrog Xray scan
