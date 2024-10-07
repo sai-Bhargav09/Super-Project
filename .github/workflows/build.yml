@@ -50,7 +50,8 @@ jobs:
         with:
           project_id: heroic-arbor-431706-b1
           workload_identity_provider:  //iam.googleapis.com/projects/402394263593/locations/global/workloadIdentityPools/oidc-git/providers/github-actions
-#          credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          service_account:  poc-service-account@heroic-arbor-431706-b1.iam.gserviceaccount.com
+#  credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
