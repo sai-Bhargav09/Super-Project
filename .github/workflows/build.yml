@@ -59,7 +59,7 @@ jobs:
 
       - name: Configure kubectl for GKE
         run: |
-          gcloud container clusters ${{ secrets.GKE_CLUSTER_NAME }} --machine-type "e2-small" --disk-size "20" --spot --num-nodes "1" --region ${{ secrets.GKE_REGION }} 
+          gcloud container clusters create ${{ secrets.GKE_CLUSTER_NAME }} --machine-type "e2-small" --disk-size "20" --spot --num-nodes "1" --region ${{ secrets.GKE_REGION }} 
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --region ${{ secrets.GKE_REGION }}
 
 #      - name: JFrog Xray scan
