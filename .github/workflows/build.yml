@@ -49,7 +49,7 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           project_id: heroic-arbor-431706-b1
-          workload_identity_provider: projects/402394263593/locations/global/workloadIdentityPools/OIDC-GIT/providers/github-actions
+          workload_identity_provider:  //iam.googleapis.com/projects/402394263593/locations/global/workloadIdentityPools/oidc-git/providers/github-actions
 #          credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Set up Cloud SDK
