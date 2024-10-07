@@ -63,6 +63,7 @@ jobs:
           if gcloud container clusters describe poc-github-cluster --zone us-central1-a --project heroic-arbor-431706-b1 >/dev/null 2>&1; then
           echo "Cluster already exists, skipping creation."
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --region ${{ secrets.GKE_REGION }}
+          kubectl get nodes
           exit 0
           else
           echo "Cluster does not exist, creating now."
