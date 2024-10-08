@@ -49,7 +49,8 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           project_id: heroic-arbor-431706-b1
-          workload_identity_provider: projects/402394263593/locations/global/workloadIdentityPools/oidc-git/providers/github-access
+          create_credentials_file: true
+          workload_identity_provider: projects/402394263593/locations/global/workloadIdentityPools/githubactions/providers/githubactions
           service_account:  poc-service-account@heroic-arbor-431706-b1.iam.gserviceaccount.com
 #  credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
