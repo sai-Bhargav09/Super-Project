@@ -41,11 +41,12 @@ jobs:
 
       - name: Log in to JFrog Artifactory
         uses: docker/login-action@v2
+        run: docker login -u admin -p Turbo3114! http://127.0.0.1:8046
 #        run: echo ${{ secrets.JFROG_ACCESS_TOKEN}} | docker login ${{ secrets.DOCKER_REGISTRY }} -u ${{ secrets.JFROG_USERNAME }} --password-stdin?
-        with:
-         registry: http://127.0.0.1:8046
-         username: admin
-         password: Turbo3114!
+#        with:
+#         registry: http://127.0.0.1:8046
+#         username: admin
+#         password: Turbo3114!
 
       - name: Build Docker image
         run: docker build -t localhost:8046/github_poc_jfrog/addressbook:latest .
