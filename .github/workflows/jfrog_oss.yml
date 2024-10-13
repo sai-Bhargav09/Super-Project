@@ -43,9 +43,10 @@ jobs:
         uses: docker/login-action@v2
 #        run: echo ${{ secrets.JFROG_ACCESS_TOKEN}} | docker login ${{ secrets.DOCKER_REGISTRY }} -u ${{ secrets.JFROG_USERNAME }} --password-stdin?
         with:
-         registry: http://localhost:8046
+         registry: http://127.0.0.1:8046
          username: admin
          password: Turbo3114!
+#         access_token: cmVmdGtuOjAxOjE3NjAzMjc1MjE6U3NpaDVOUFJWaFZINnpWQlZwTmh3bm5mQWxt
 
       - name: Build Docker image
         run: docker build -t localhost:8046/github_poc_jfrog/addressbook:latest .
